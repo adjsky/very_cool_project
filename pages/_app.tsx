@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import Head from "next/head"
 import { observer } from "mobx-react-lite"
 import { ThemeProvider } from "styled-components"
@@ -9,6 +9,12 @@ import "@/styles/globals.css"
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const { uiState } = useContext(StoreContext)
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js")
+    }
+  }, [])
 
   return (
     <>
