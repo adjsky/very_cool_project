@@ -1,4 +1,4 @@
-const version = "v0.5"
+const version = "v0.6"
 const cacheName = "very_cool_project-" + version
 
 const contentToCache = ["/"]

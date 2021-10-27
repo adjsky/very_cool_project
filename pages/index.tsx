@@ -21,7 +21,7 @@ function Home(): JSX.Element {
         uiState.setTheme(uiState.theme == "light" ? "dark" : "light")
       }}
     >
-      Change theme v5
+      Change theme v6
     </Button>
   )
 }
