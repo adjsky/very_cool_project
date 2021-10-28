@@ -1,9 +1,14 @@
-const version = "v0.82"
+const version = "v0.83"
 const cacheName = "very_cool_project-" + version
 
 const contentToCache = [
   "/",
-  "/icon-200.png"
+  "/icon-32.png",
+  "/icon-64.png",
+  "/icon-128.png",
+  "/icon-256.png",
+  "/icon-512.png",
+  "/icon-192.png"
 ]
 
 self.addEventListener("install", (event) => {
