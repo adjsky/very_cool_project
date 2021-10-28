@@ -49,7 +49,7 @@ class MyDocument extends Document {
           />
           <link
             rel="icon"
-            href="/icon-200.png"
+            href="/icon-32.png"
             type="image/png"
           />
         </Head>
