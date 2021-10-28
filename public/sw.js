@@ -9,6 +9,7 @@ self.addEventListener("install", (event) => {
       console.log("[Service Worker] Install")
       const cache = await caches.open(cacheName)
       await cache.addAll(contentToCache)
+      console.log("[Service Worker] Cached assets")
     })()
   )
 })
@@ -18,7 +19,6 @@ self.addEventListener("activate", (event) => {
     (async () => {
       console.log("[Service Worker] Activate")
       const keys = await caches.keys()
-      console.log(`[Service Worker] Keys: ${keys}, cacheName: ${cacheName}`)
       await Promise.all(
         keys.map((key) => {
           if (key != cacheName) {

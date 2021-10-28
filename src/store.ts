@@ -10,6 +10,7 @@ type Theme = "light" | "dark"
 
 class UiState {
   public theme: Theme = "light"
+  public updateFound: boolean = false
 
   constructor() {
     makeAutoObservable(this)
@@ -17,6 +18,10 @@ class UiState {
 
   setTheme(theme: Theme) {
     this.theme = theme
+  }
+
+  setUpdateFound(update: boolean) {
+    this.updateFound = update
   }
 }
 

@@ -14,10 +14,14 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("/sw.js").then((reg) => {
         reg.onupdatefound = async () => {
-          console.log("Update found")
+          console.log("[Service Worker] Update found")
           if (reg.installing && reg.active) {
-            await reg.unregister()
-            window.location.reload()
+            uiState.setUpdateFound(true)
+            const result = window.confirm("Update is available, update?")
+            if (result) {
+              await reg.unregister()
+              window.location.reload()
+            }
           }
         }
       })
