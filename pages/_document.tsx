@@ -51,6 +51,37 @@ class MyDocument extends Document {
             rel="icon"
             href="/icon-32.png"
             type="image/png"
+            sizes="32x32"
+          />
+          <link
+            rel="icon"
+            href="/icon-64.png"
+            type="image/png"
+            sizes="64x64"
+          />
+          <link
+            rel="icon"
+            href="/icon-128.png"
+            type="image/png"
+            sizes="128x128"
+          />
+          <link
+            rel="icon"
+            href="/icon-192.png"
+            type="image/png"
+            sizes="192x192"
+          />
+          <link
+            rel="icon"
+            href="/icon-256.png"
+            type="image/png"
+            sizes="256x256"
+          />
+          <link
+            rel="icon"
+            href="/icon-512.png"
+            type="image/png"
+            sizes="512x512"
           />
         </Head>
         <body>
