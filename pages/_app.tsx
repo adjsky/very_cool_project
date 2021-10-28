@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         />
         <meta
           name="theme-color"
-          content="red"
+          content={uiState.theme == "light" ? "#FFFFFF" : "#000000"}
         />
       </Head>
       <ThemeProvider theme={uiState.theme == "light" ? lightTheme : darkTheme}>
