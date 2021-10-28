@@ -1,7 +1,10 @@
-const version = "v0.7"
+const version = "v0.8"
 const cacheName = "very_cool_project-" + version
 
-const contentToCache = ["/"]
+const contentToCache = [
+  "/",
+  "/icon-200.png"
+]
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

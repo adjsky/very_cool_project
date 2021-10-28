@@ -47,6 +47,11 @@ class MyDocument extends Document {
             rel="manifest"
             href="/manifest.json"
           />
+          <link
+            rel="icon"
+            href="/icon-200.png"
+            type="image/png"
+          />
         </Head>
         <body>
           <Main />

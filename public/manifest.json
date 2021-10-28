@@ -1,15 +1,16 @@
 {
-  "name": "very-cool-app",
-  "short_name": "Cool App",
+  "name": "very-cool-project",
+  "short_name": "Cool project",
   "description": "Very cool progressive web app.",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "sizes": "32x32"
+      "src": "/icon-200.png",
+      "sizes": "200x200",
+      "type": "image/png"
     }
   ],
   "start_url": "/",
-  "display": "fullscreen",
+  "display": "standalone",
   "theme_color": "red",
   "background_color": "#FFFFFF"
 }
