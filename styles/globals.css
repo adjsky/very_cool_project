@@ -1,3 +1,7 @@
+:root {
+  --header-height: 70px;
+}
+
 html,
 body {
   padding: 0;
@@ -12,5 +16,10 @@ body {
 
 html {
   font-size: 18px;
+}
+
+html,
+button,
+input {
   font-family: "Montserrat", sans-serif;
 }
