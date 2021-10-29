@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const { uiState } = useContext(StoreContext)
 
   useEffect(() => {
-    if ("serviceWorker" in navigator) {
+    if ("serviceWorker" in navigator && process.env.NEXT_PUBLIC_IS_PROD) {
       navigator.serviceWorker.register("/sw.js").then((reg) => {
         reg.onupdatefound = async () => {
           console.log("[Service Worker] Update found")
