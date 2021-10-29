@@ -16,13 +16,9 @@ const Container = styled.div`
   padding: 0 25px;
 `
 
-const Logo = styled.div`
+const Logo = styled.div``
 
-`
-
-const Navigation = styled.nav`
-
-`
+const Navigation = styled.nav``
 
 const ManageWrapper = styled.div`
   display: flex;
@@ -46,13 +42,9 @@ function Header() {
 
   return (
     <Container>
-      <Logo>
-        Logo
-      </Logo>
+      <Logo>Logo</Logo>
       <ManageWrapper>
-        <Navigation>
-          Navigation
-        </Navigation>
+        <Navigation>Navigation</Navigation>
         <ThemeButton
           onClick={() => {
             uiState.setTheme(uiState.theme == "light" ? "dark" : "light")
