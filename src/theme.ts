@@ -50,7 +50,7 @@ export const darkTheme: Theme = {
     dark: "#1b5e20",
     light: "#4caf50",
     contrastText: "#ffffff"
-  },
+  }
 }
 
 export const lightTheme: Theme = {
@@ -58,36 +58,36 @@ export const lightTheme: Theme = {
     main: "#90caf9",
     dark: "#42a5f5",
     light: "#e3f2fd",
-    contrastText: "#000000"
+    contrastText: "rgba(0, 0, 0, 0.87)"
   },
   secondary: {
     main: "#ce93d8",
     dark: "#ab47bc",
     light: "#f3e5f5",
-    contrastText: "#000000"
+    contrastText: "rgba(0, 0, 0, 0.87)"
   },
   error: {
     main: "#f44336",
     dark: "#d32f2f",
     light: "#e57373",
-    contrastText: "#000000"
+    contrastText: "#ffffff"
   },
   warning: {
     main: "#ffa726",
     dark: "#f57c00",
     light: "#ffb74d",
-    contrastText: "#000000"
+    contrastText: "rgba(0, 0, 0, 0.87"
   },
   info: {
     main: "#29b6f6",
     dark: "#0288d1",
     light: "#4fc3f7",
-    contrastText: "#000000"
+    contrastText: "rgba(0, 0, 0, 0.87"
   },
   success: {
     main: "#66bb6a",
     dark: "#388e3c",
     light: "#81c784",
-    contrastText: "#000000"
-  },
+    contrastText: "rgba(0, 0, 0, 0.87"
+  }
 }
