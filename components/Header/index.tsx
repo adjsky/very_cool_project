@@ -1,66 +1,66 @@
-import React, { useContext } from "react"
+import React from "react"
 import styled from "styled-components"
-import StoreContext from "@/src/store"
+import Link from "next/link"
+import LogoContainer from "./LogoContainer"
+import ThemeButton from "./ThemeButton"
+import NavigationButton from "./NavigationButton"
 
-const Wrapper = styled.header`
-  position: fixed;  
+const Container = styled.header`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--header-height);
+  background-color: #3c4452;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  background-color: ${(props) => props.theme.primary.main};
-  color: ${(props) => props.theme.primary.contrastText};
+
+  @media only screen and (max-width: 480px) {
+    flex-direction: column;
+    height: calc(2 * var(--header-height));
+  }
 `
-
-const Container = styled.div`
-  max-width: 1920px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: var(--header-height);
-`
-
-const Logo = styled.div``
-
-const Navigation = styled.nav``
 
 const ManageWrapper = styled.div`
   display: flex;
+  align-self: stretch;
   align-items: center;
-  gap: 50px;
+  flex: 1 1 auto;
+  padding: 0 30px;
+  justify-content: space-between;
+
+  button {
+    font-size: 1rem;
+  }
+
+  @media only screen and (max-width: 480px) {
+    justify-content: flex-end;
+  }
 `
 
-const ThemeButton = styled.button`
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: ${(props) => props.theme.primary.light};
-  color: ${(props) => props.theme.primary.contrastText};
-  border: none;
-  outline: none;
-  cursor: pointer;
-  border-radius: 20px;
+const LogoLink = styled.a`
+  color: #fff;
+  letter-spacing: 2px;
+  font-size: 1.3rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-decoration: none;
 `
 
-function Header() {
-  const { uiState } = useContext(StoreContext)
-
+function Header(): JSX.Element {
   return (
-    <Wrapper>
-      <Container>
-        <Logo>Logo</Logo>
-        <ManageWrapper>
-          <Navigation>Navigation</Navigation>
-          <ThemeButton
-            onClick={() => {
-              uiState.setTheme(uiState.theme == "light" ? "dark" : "light")
-            }}
-          >
-            Change Theme
-          </ThemeButton>
-        </ManageWrapper>
-      </Container>
-    </Wrapper>
+    <Container>
+      <LogoContainer>
+        <Link href="/" passHref>
+          <LogoLink>Logo</LogoLink>
+        </Link>
+        <NavigationButton forMobile={true} />
+      </LogoContainer>
+      <ManageWrapper>
+        <NavigationButton forMobile={false} />
+        <ThemeButton />
+      </ManageWrapper>
+    </Container>
   )
 }
 

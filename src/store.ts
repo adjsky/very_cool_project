@@ -2,15 +2,18 @@ import { createContext } from "react"
 import { makeAutoObservable } from "mobx"
 import { enableStaticRendering } from "mobx-react-lite"
 
-interface Store {
+export interface Store {
   uiState: UiState
 }
 
-type Theme = "light" | "dark"
+export type Theme = "light" | "dark"
 
-class UiState {
+export const isBrowser = typeof window != "undefined"
+
+export class UiState {
   public theme: Theme = "light"
   public updateFound: boolean = false
+  public navigationOpen: boolean = false
 
   constructor() {
     makeAutoObservable(this)
@@ -23,9 +26,13 @@ class UiState {
   setUpdateFound(update: boolean) {
     this.updateFound = update
   }
+
+  setNavigationOpen(open: boolean) {
+    this.navigationOpen = open
+  }
 }
 
-enableStaticRendering(typeof window == "undefined")
+enableStaticRendering(!isBrowser)
 
 export default createContext<Store>({
   uiState: new UiState()

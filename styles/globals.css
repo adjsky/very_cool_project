@@ -1,5 +1,6 @@
 :root {
   --header-height: 70px;
+  --nav-width: 250px;
 }
 
 html,
@@ -22,4 +23,10 @@ html,
 button,
 input {
   font-family: "Montserrat", sans-serif;
+}
+
+@media only screen and (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
 }
