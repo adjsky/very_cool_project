@@ -1,12 +1,14 @@
-import React, { useContext, useEffect } from "react"
+import React, { useEffect } from "react"
 import Head from "next/head"
-import { observer } from "mobx-react-lite"
 import { ThemeProvider } from "styled-components"
 import type { AppProps } from "next/app"
-import StoreContext, { UiState } from "@/src/store"
 import { lightTheme, darkTheme } from "@/src/theme"
 import styled from "styled-components"
 import { useRouter } from "next/router"
+import { Provider } from "react-redux"
+import store, { AppDispatch } from "@/src/redux/store"
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks"
+import { setUpdateFound, openNavigation } from "@/src/redux/uiSlice"
 import Header from "@/components/Header"
 import Navigation from "@/components/Navigation"
 import "@/styles/globals.css"
@@ -18,16 +20,30 @@ type ContainerProps = {
 const Container = styled.div<ContainerProps>`
   margin-top: var(--header-height);
   margin-left: ${(props) => (props.navOpen ? "var(--nav-width)" : "0px")};
-  transition: margin-left 0.3s linear;
+  transition: margin-left 0.3s ease-in-out;
 `
 
-const initializeSW = (uiState: UiState) => {
+type AdaptiveContainerProps = {
+  children: JSX.Element
+}
+
+const AdaptiveContainer = ({ children }: AdaptiveContainerProps) => {
+  const navOpen = useAppSelector((store) => store.ui.navigationOpen)
+
+  return (
+    <Container navOpen={navOpen}>
+      {children}
+    </Container>
+  )
+}
+
+const initializeSW = (dispatch: AppDispatch) => {
   if ("serviceWorker" in navigator && process.env.NEXT_PUBLIC_IS_PROD) {
     navigator.serviceWorker.register("/sw.js").then((reg) => {
       reg.onupdatefound = async () => {
         console.log("[Service Worker] Update found")
         if (reg.installing && reg.active) {
-          uiState.setUpdateFound(true)
+          dispatch(setUpdateFound(true))
           const result = window.confirm("Update is available, update?")
           if (result) {
             await reg.unregister()
@@ -40,7 +56,8 @@ const initializeSW = (uiState: UiState) => {
 }
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
-  const { uiState } = useContext(StoreContext)
+  const dispatch = useAppDispatch()
+  const theme = useAppSelector((store) => store.ui.theme)
   const router = useRouter()
 
   useEffect(() => {
@@ -57,14 +74,14 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     }
 
     if (window.innerWidth > 480) {
-      uiState.setNavigationOpen(true)
+      dispatch(openNavigation(true))
     }
 
     window.onload = () => {
       console.log("[App] Page loaded")
     }
 
-    initializeSW(uiState)
+    initializeSW(dispatch)
 
     router.events.on("routeChangeStart", handleRouteChange)
     router.events.on("routeChangeComplete", handleRouteComplete)
@@ -87,18 +104,26 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         />
         <meta
           name="theme-color"
-          content={uiState.theme == "light" ? "#FFFFFF" : "#000000"}
+          content={theme == "light" ? "#FFFFFF" : "#000000"}
         />
       </Head>
-      <ThemeProvider theme={uiState.theme == "light" ? lightTheme : darkTheme}>
+      <ThemeProvider theme={theme == "light" ? lightTheme : darkTheme}>
         <Header />
         <Navigation />
-        <Container navOpen={uiState.navigationOpen}>
+        <AdaptiveContainer>
           <Component {...pageProps} />
-        </Container>
+        </AdaptiveContainer>
       </ThemeProvider>
     </>
   )
 }
 
-export default observer(MyApp)
+function Wrapper(props: AppProps): JSX.Element {
+  return (
+    <Provider store={store}>
+      <MyApp {...props} />
+    </Provider>
+  )
+}
+
+export default Wrapper

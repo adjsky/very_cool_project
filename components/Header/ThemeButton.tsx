@@ -1,6 +1,7 @@
-import React, { useContext } from "react"
+import React from "react"
 import styled from "styled-components"
-import StoreContext from "@/src/store"
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks"
+import { changeTheme } from "@/src/redux/uiSlice"
 import { MdOutlineNightsStay, MdOutlineWbSunny } from "react-icons/md"
 
 const Button = styled.button`
@@ -12,19 +13,16 @@ const Button = styled.button`
 `
 
 function ThemeButton(): JSX.Element {
-  const { uiState } = useContext(StoreContext)
+  const dispatch = useAppDispatch()
+  const theme = useAppSelector((store) => store.ui.theme)
 
   return (
     <Button
       onClick={() => {
-        uiState.setTheme(uiState.theme == "light" ? "dark" : "light")
+        dispatch(changeTheme(theme == "light" ? "dark" : "light"))
       }}
     >
-      {uiState.theme == "light" ? (
-        <MdOutlineNightsStay />
-      ) : (
-        <MdOutlineWbSunny />
-      )}
+      {theme == "light" ? <MdOutlineNightsStay /> : <MdOutlineWbSunny />}
     </Button>
   )
 }

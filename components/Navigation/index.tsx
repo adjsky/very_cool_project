@@ -1,13 +1,12 @@
-import React, { useContext } from "react"
+import React from "react"
 import styled from "styled-components"
-import { observer } from "mobx-react-lite"
-import StoreContext from "@/src/store"
+import { useAppSelector } from "@/src/redux/hooks"
 
 type ContainerProps = {
   open: boolean
 }
 
-const Container = styled.div<ContainerProps>`
+const Container = styled.nav<ContainerProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,13 +22,13 @@ const Container = styled.div<ContainerProps>`
   transform: translateX(
     ${(props) => (props.open ? "0px" : "calc(-1 * var(--nav-width))")}
   );
-  transition: transform 0.3s linear;
+  transition: transform 0.3s ease-in-out;
 `
 
 function Navigation(): JSX.Element {
-  const { uiState } = useContext(StoreContext)
+  const navOpen = useAppSelector((store) => store.ui.navigationOpen)
 
-  return <Container open={uiState.navigationOpen}>Navigation</Container>
+  return <Container open={navOpen}>Navigation</Container>
 }
 
-export default observer(Navigation)
+export default Navigation

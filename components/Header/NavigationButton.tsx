@@ -1,7 +1,7 @@
-import React, { useContext } from "react"
+import React from "react"
+import { useAppSelector, useAppDispatch } from "@/src/redux/hooks"
+import { openNavigation } from "@/src/redux/uiSlice"
 import styled from "styled-components"
-import { observer } from "mobx-react-lite"
-import StoreContext from "@/src/store"
 
 type ButtonProps = {
   navOpen: boolean
@@ -17,6 +17,22 @@ const Button = styled.button<ButtonProps>`
   flex-direction: column;
   gap: 4px;
   padding: 0;
+
+  span {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  span:first-child {
+    transform: ${(props) =>
+      props.navOpen ? "rotate(-45deg) translateX(-2px)" : "none"};
+    width: ${(props) => (props.navOpen ? "12px" : "25px")};
+  }
+
+  span:last-child {
+    transform: ${(props) =>
+      props.navOpen ? "rotate(45deg) translateX(-2px)" : "none"};
+    width: ${(props) => (props.navOpen ? "12px" : "25px")};
+  }
 
   @media only screen and (max-width: 480px) {
     display: ${(props) => (props.forMobile ? "flex" : "none")};
@@ -39,15 +55,16 @@ type NavigationButtonProps = {
 }
 
 function NavigationButton({ forMobile }: NavigationButtonProps): JSX.Element {
-  const { uiState } = useContext(StoreContext)
+  const dispatch = useAppDispatch()
+  const navOpen = useAppSelector((store) => store.ui.navigationOpen)
 
   return (
     <Button
       type="button"
       onClick={() => {
-        uiState.setNavigationOpen(!uiState.navigationOpen)
+        dispatch(openNavigation(!navOpen))
       }}
-      navOpen={uiState.navigationOpen}
+      navOpen={navOpen}
       forMobile={forMobile}
     >
       <Bar />
