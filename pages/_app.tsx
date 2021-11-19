@@ -113,7 +113,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
         <meta
           name="theme-color"
-          content={theme == "light" ? "#FFFFFF" : "#000000"}
+          content={theme == "light" ? "#FFFFFF" : "#3c4452"}
         />
       </Head>
       <ThemeProvider theme={theme == "light" ? lightTheme : darkTheme}>
