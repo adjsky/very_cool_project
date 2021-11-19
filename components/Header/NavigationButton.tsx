@@ -54,7 +54,7 @@ type NavigationButtonProps = {
   forMobile: boolean
 }
 
-function NavigationButton({ forMobile }: NavigationButtonProps): JSX.Element {
+function NavigationButton({ forMobile }: NavigationButtonProps) {
   const dispatch = useAppDispatch()
   const navOpen = useAppSelector((store) => store.ui.navigationOpen)
 

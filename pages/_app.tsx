@@ -8,7 +8,12 @@ import { useRouter } from "next/router"
 import { Provider } from "react-redux"
 import store, { AppDispatch } from "@/src/redux/store"
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks"
-import { setUpdateFound, openNavigation } from "@/src/redux/uiSlice"
+import {
+  setUpdateFound,
+  openNavigation,
+  changeTheme
+} from "@/src/redux/uiSlice"
+import type { Theme } from "@/src/redux/uiSlice"
 import Header from "@/components/Header"
 import Navigation from "@/components/Navigation"
 import "@/styles/globals.css"
@@ -30,11 +35,7 @@ type AdaptiveContainerProps = {
 const AdaptiveContainer = ({ children }: AdaptiveContainerProps) => {
   const navOpen = useAppSelector((store) => store.ui.navigationOpen)
 
-  return (
-    <Container navOpen={navOpen}>
-      {children}
-    </Container>
-  )
+  return <Container navOpen={navOpen}>{children}</Container>
 }
 
 const initializeSW = (dispatch: AppDispatch) => {
@@ -55,7 +56,14 @@ const initializeSW = (dispatch: AppDispatch) => {
   }
 }
 
-function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+const checkTheme = (dispatch: AppDispatch) => {
+  const theme = window.localStorage.getItem("theme")
+  if (theme) {
+    dispatch(changeTheme(theme as Theme))
+  }
+}
+
+function MyApp({ Component, pageProps }: AppProps) {
   const dispatch = useAppDispatch()
   const theme = useAppSelector((store) => store.ui.theme)
   const router = useRouter()
@@ -82,6 +90,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     }
 
     initializeSW(dispatch)
+    checkTheme(dispatch)
 
     router.events.on("routeChangeStart", handleRouteChange)
     router.events.on("routeChangeComplete", handleRouteComplete)
@@ -118,7 +127,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   )
 }
 
-function Wrapper(props: AppProps): JSX.Element {
+function Wrapper(props: AppProps) {
   return (
     <Provider store={store}>
       <MyApp {...props} />

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-type Theme = "light" | "dark"
+export type Theme = "light" | "dark"
 
 export type UiState = {
   theme: Theme
@@ -18,8 +18,20 @@ export const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
-    changeTheme: (state, action: PayloadAction<Theme>) => {
-      state.theme = action.payload
+    changeTheme: {
+      reducer(state, action: PayloadAction<Theme>) {
+        state.theme = action.payload
+      },
+      prepare(theme: Theme) {
+        if (theme == "dark") {
+          window.localStorage.setItem("theme", theme)
+        } else {
+          window.localStorage.removeItem("theme")
+        }
+        return {
+          payload: theme
+        }
+      }
     },
     openNavigation: (state, action: PayloadAction<boolean>) => {
       state.navigationOpen = action.payload

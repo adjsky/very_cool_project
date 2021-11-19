@@ -47,7 +47,7 @@ const LogoLink = styled.a`
   text-decoration: none;
 `
 
-function Header(): JSX.Element {
+function Header() {
   return (
     <Container>
       <LogoContainer>

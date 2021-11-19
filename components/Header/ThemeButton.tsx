@@ -12,7 +12,7 @@ const Button = styled.button`
   color: #fff;
 `
 
-function ThemeButton(): JSX.Element {
+function ThemeButton() {
   const dispatch = useAppDispatch()
   const theme = useAppSelector((store) => store.ui.theme)
 
