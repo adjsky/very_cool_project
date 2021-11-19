@@ -111,10 +111,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
-        <meta
-          name="theme-color"
-          content={theme == "light" ? "#FFFFFF" : "#3c4452"}
-        />
       </Head>
       <ThemeProvider theme={theme == "light" ? lightTheme : darkTheme}>
         <Header />
