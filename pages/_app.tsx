@@ -24,8 +24,8 @@ type ContainerProps = {
 
 const Container = styled.div<ContainerProps>`
   margin-top: var(--header-height);
-  margin-left: ${(props) => (props.navOpen ? "var(--nav-width)" : "0px")};
-  transition: margin-left 0.3s ease-in-out;
+  padding-left: ${(props) => (props.navOpen ? "var(--nav-width)" : "0px")};
+  transition: padding-left 0.3s ease-in-out;
 `
 
 type AdaptiveContainerProps = {
