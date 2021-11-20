@@ -1,3 +1,4 @@
+import React from "react"
 import styled from "styled-components"
 import { useAppSelector } from "@/src/redux/hooks"
 
@@ -19,7 +20,7 @@ const Container = styled.main<ContainerProps>`
 `
 
 type AdaptiveContainerProps = {
-  children: JSX.Element
+  children: React.ReactNode
 }
 
 function AdaptiveContainer({ children }: AdaptiveContainerProps) {
