@@ -16,17 +16,8 @@ type GroupProps = {
 
 function Group({ icon, title, bigTitle, routes }: GroupProps) {
   const [active, setActive] = useState<boolean>(false)
-  const [hasActiveLink, setActiveLink] = useState<boolean>(false)
   const router = useRouter()
-
-  useEffect(() => {
-    for (const route of routes) {
-      if (routeMatches(router, route.href)) {
-        setActiveLink(true)
-        break
-      }
-    }
-  }, [])
+  const hasActiveLink = routes.some((route) => routeMatches(router, route.href))
 
   return (
     <>
