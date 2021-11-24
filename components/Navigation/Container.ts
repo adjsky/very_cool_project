@@ -7,6 +7,7 @@ type ContainerProps = {
 const Container = styled.nav<ContainerProps>`
   width: var(--nav-width);
   height: calc(100vh - var(--header-height));
+  padding-bottom: 200px;
   position: fixed;
   top: var(--header-height);
   left: 0;

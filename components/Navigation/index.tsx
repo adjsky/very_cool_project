@@ -32,6 +32,7 @@ import {
 
 const LinkAsTitle = styled(StyledLink)`
   display: flex;
+  align-items: center;
   gap: 15px;
   font-size: 0.7rem;
   letter-spacing: 1px;
@@ -45,7 +46,11 @@ const LinkAsTitle = styled(StyledLink)`
 const NewLinkAsTitle = styled(LinkAsTitle)`
   &:after {
     content: "NEW";
-
+    color: #ffffff;
+    background-color: #0c666a;
+    padding: 2px 5px;
+    font-size: 0.7rem;
+    letter-spacing: 0px;
   }
 `
 

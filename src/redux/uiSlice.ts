@@ -6,12 +6,14 @@ export type UiState = {
   theme: Theme
   updateFound: boolean
   navigationOpen: boolean
+  showLoading: boolean
 }
 
 const initialState: UiState = {
   theme: "light",
   updateFound: false,
-  navigationOpen: false
+  navigationOpen: false,
+  showLoading: false
 }
 
 export const uiSlice = createSlice({
@@ -38,10 +40,14 @@ export const uiSlice = createSlice({
     },
     setUpdateFound: (state, action: PayloadAction<boolean>) => {
       state.updateFound = action.payload
+    },
+    showLoading: (state, action: PayloadAction<boolean>) => {
+      state.showLoading = action.payload
     }
   }
 })
 
-export const { changeTheme, openNavigation, setUpdateFound } = uiSlice.actions
+export const { changeTheme, openNavigation, setUpdateFound, showLoading } =
+  uiSlice.actions
 
 export default uiSlice.reducer

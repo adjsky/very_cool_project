@@ -10,12 +10,18 @@ import { useAppDispatch, useAppSelector } from "@/src/redux/hooks"
 import {
   setUpdateFound,
   openNavigation,
-  changeTheme
+  changeTheme,
+  showLoading
 } from "@/src/redux/uiSlice"
 import type { Theme } from "@/src/redux/uiSlice"
 import Header from "@/components/Header"
 import Navigation from "@/components/Navigation"
+import dynamic from "next/dynamic"
 import "@/styles/globals.css"
+
+const LoadingBar = dynamic(() => import("@/components/LoadIndicator/bar"), {
+  ssr: false
+})
 
 const initializeSW = (dispatch: AppDispatch) => {
   if ("serviceWorker" in navigator && process.env.NEXT_PUBLIC_IS_PROD) {
@@ -50,14 +56,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const handleRouteChange = () => {
       console.log("[App] Route change")
+      dispatch(showLoading(true))
     }
 
     const handleRouteComplete = () => {
       console.log("[App] Route change complete")
+      dispatch(showLoading(false))
     }
 
     const handleRouteError = () => {
       console.log("[App] Route change error")
+      dispatch(showLoading(false))
     }
 
     if (window.innerWidth > 480) {
@@ -95,6 +104,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Header />
         <Navigation />
         <Component {...pageProps} />
+        <LoadingBar />
       </ThemeProvider>
     </>
   )
